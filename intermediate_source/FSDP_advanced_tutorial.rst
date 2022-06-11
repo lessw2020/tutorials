@@ -1,26 +1,27 @@
-Advanced Fully Sharded Data Parallel(FSDP) Tutorial
+Advanced Fully Sharded Data Parallel (FSDP) Tutorial
 =====================================================
 
-**Author**: `Hamid Shojanazeri <https://github.com/HamidShojanazeri>`__, `Yanli Zhao <https://github.com/zhaojuanmao>`__, `Shen Li <https://mrshenli.github.io/>`__
+**Authors**: `Hamid Shojanazeri <https://github.com/HamidShojanazeri>`__, `Yanli Zhao <https://github.com/zhaojuanmao>`__, `Shen Li <https://mrshenli.github.io/>`__, `Less Wright <https:://github.com/lessw2020>`_
 
 .. note::
    View the source code for this tutorial in `github <https://github.com/pytorch/tutorials/blob/master/intermediate_source/FSDP_tutorial.rst>`__.
 
-This is an advanced Fully Sharded Data Parallel tutorial and the follow up on the `FSDP getting started tutorial <https://pytorch.org/tutorials/intermediate/FSDP_tutorial.html>`__ .
-In this tutorial, we are going to intorduce more advanced features of FSDP as it has been resealed with Pytorch 1.12. We are going to fine-tune a HuggingFace (HF) T5 model with FSDP for text summarization. 
-Wikihow is the dataset being used in this tutorial and for simplicty we will perfrom the training on a single node, P4dn instance with 8, A100 GPUs. We will soon have a blog post on large scale FSDP training on cluster, please stay tuned for that Pytorch medium channel.
+This is an advanced Fully Sharded Data Parallel tutorial, and the follow up to the `FSDP getting started tutorial <https://pytorch.org/tutorials/intermediate/FSDP_tutorial.html>`__ .
+In this tutorial, we are going to introduce several more advanced features of FSDP that have been released with Pytorch 1.12. We are going to fine-tune a HuggingFace (HF) T5 model with FSDP for text summarization. 
+Wikihow is the dataset being used in this tutorial, and for simplicty we will perfrom the training on a single node, P4dn instance with 8, A100 GPUs. We will soon have a blog post on large scale FSDP training on cluster (multi-node) training, please stay tuned for that Pytorch medium channel.
 
-FSDP is production ready pakcage that aims to make the large scale distributed training easier by reducing the memory footprint on each GPU. This enable training larger models with less compute.  
-Also it can lead to affording larger batch sizes during the training and ideally positvely impact the training speed and cost. 
-Please read more Pytorch FSDP `here <https://pytorch.org/blog/introducing-pytorch-fully-sharded-data-parallel-api/>`__.
+FSDP is production ready package that makes large scale distributed training easier by reducing the memory footprint on each GPU. This enable training larger models with less memory requirements on a per GPU basis.  This is done by overlapping communication with computation, allowing for each GPU to only be responsible for a subset of the entire model.  
+FSDP can also allow for larger batch sizes during the training, and ideally improve the overall training speed and cost by maximizing throughput. 
+You can read more about Pytorch FSDP `here <https://pytorch.org/blog/introducing-pytorch-fully-sharded-data-parallel-api/>`__.
 
 
 FSDP Features in This Tutorial
 --------------
-* Transfromer Auto Wrap Policy
-* Mixed Percision
+* Transformer Auto Wrap Policy
+* FSDP Initialization with device_id 
+* Mixed Precision
 * Activation Checkpointing
-* Checkpoint Saving Streamed on CPU
+* Model Checkpoint Saving Streamed to CPU
 
 
 
