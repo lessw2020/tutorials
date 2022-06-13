@@ -1,7 +1,7 @@
-Advanced Fully Sharded Data Parallel(FSDP) Tutorial
+Advanced Fully Sharded Data Parallel (FSDP) Tutorial
 =====================================================
 
-**Author**: `Hamid Shojanazeri <https://github.com/HamidShojanazeri>`__, `Yanli Zhao <https://github.com/zhaojuanmao>`__, `Shen Li <https://mrshenli.github.io/>`__
+**Author**: `Hamid Shojanazeri <https://github.com/HamidShojanazeri>`__, `Less Wright <https://github.com/lessw2020>`__, `Yanli Zhao <https://github.com/zhaojuanmao>`__, `Shen Li <https://mrshenli.github.io/>`__
 
 .. note::
    View the source code for this tutorial in `github <https://github.com/pytorch/tutorials/blob/master/intermediate_source/FSDP_tutorial.rst>`__.
